@@ -1,3 +1,4 @@
+//该类表示项目的通用布局
 <template>
   <div id="basicLayout">
     <a-layout style="height: 400px">
@@ -21,8 +22,8 @@
 }
 
 #basicLayout .header {
-  background: red;
   margin-bottom: 16px;
+  box-shadow: #eee 1px 1px 5px;
 }
 
 #basicLayout .content {
