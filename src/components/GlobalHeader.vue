@@ -13,7 +13,7 @@
           disabled
         >
           <div class="title-bar">
-            <img class="logo" src="../assets/oj-logo.jpg" />
+            <img class="logo" src="../assets/love.jpg" />
             <div class="title">澜 OJ</div>
           </div>
         </a-menu-item>
@@ -61,6 +61,7 @@ const store = useStore();
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     userName: "怡宝",
+    role: "admin",
   });
 }, 3000);
 </script>

@@ -32,12 +32,13 @@ export default {
   state: () => ({
     loginUser: {
       userName: "陈爱国",
+      role: "notLogin",
     },
   }),
   actions: {
     async getLoginUser({ commit, state }, payload) {
       //TODO 这里后续要改成从远程请求获取登录信息
-      commit("updateUser", { userName: "怡宝" });
+      commit("updateUser", { userName: "怡宝", role: "admin" });
     },
   },
   mutations: {
