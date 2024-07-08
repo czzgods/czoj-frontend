@@ -1,6 +1,7 @@
 //该类是全局状态管理类
 
 import { StoreOptions } from "vuex";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 /*//initial state: 存储的状态信息，比如用户信息
 const state = () => ({
@@ -31,14 +32,14 @@ export default {
   namespaced: true,
   state: () => ({
     loginUser: {
-      userName: "陈爱国",
-      role: "notLogin",
+      userName: "未登录",
+      userRole: ACCESS_ENUM.NOT_LOGIN,
     },
   }),
   actions: {
-    async getLoginUser({ commit, state }, payload) {
+    getLoginUser({ commit, state }, payload) {
       //TODO 这里后续要改成从远程请求获取登录信息
-      commit("updateUser", { userName: "怡宝", role: "admin" });
+      commit("updateUser", payload);
     },
   },
   mutations: {
