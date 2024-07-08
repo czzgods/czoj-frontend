@@ -1,6 +1,6 @@
 //该类表示全局的页面头部布局，就是页面上方导航栏那块
 <template>
-  <a-row id="globalHeader" style="margin-bottom: 16px" align="center">
+  <a-row id="globalHeader" align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -17,7 +17,7 @@
             <div class="title">澜 OJ</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -40,6 +40,13 @@ import { useStore } from "vuex";
 //页面路由，页面跳转
 const router = useRouter();
 
+//展示在菜单的路由数组
+const visibleRoutes = routes.filter((item, index) => {
+  if (item.meta?.hideInMenu) {
+    return false;
+  }
+  return true;
+});
 //默认当前页
 const selectKeys = ref(["/"]);
 
