@@ -2,6 +2,7 @@
 
 import { StoreOptions } from "vuex";
 import ACCESS_ENUM from "@/access/accessEnum";
+import { UserControllerService } from "../../generated";
 
 /*//initial state: 存储的状态信息，比如用户信息
 const state = () => ({
@@ -33,13 +34,20 @@ export default {
   state: () => ({
     loginUser: {
       userName: "未登录",
-      userRole: ACCESS_ENUM.NOT_LOGIN,
     },
   }),
   actions: {
-    getLoginUser({ commit, state }, payload) {
-      //TODO 这里后续要改成从远程请求获取登录信息
-      commit("updateUser", payload);
+    async getLoginUser({ commit, state }, payload) {
+      //从远程请求获取登录信息
+      const res = await UserControllerService.getLoginUserUsingGet();
+      if (res.code === 0) {
+        commit("updateUser", res.data);
+      } else {
+        commit("updateUser", {
+          ...state.loginUser,
+          userRole: ACCESS_ENUM.NOT_LOGIN,
+        });
+      }
     },
   },
   mutations: {
