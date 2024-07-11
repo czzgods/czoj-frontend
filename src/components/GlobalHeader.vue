@@ -47,6 +47,9 @@ const store = useStore();
 
 //展示在菜单的路由数组
 //computed函数用于重新计算或者说是刷新页面
+/**
+ * 下面这个方法就是说根据用户的权限给用户展示对应的页面
+ */
 const visibleRoutes = computed(() => {
   return routes.filter((item, index) => {
     if (item.meta?.hideInMenu) {
