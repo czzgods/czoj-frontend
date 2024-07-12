@@ -84,7 +84,7 @@ const handleSubmit = async () => {
   if (res.code === 0) {
     //获取当前登录用户的状态信息
     //await store.dispatch("user/getLoginUser");
-    //登录成功，跳转主页
+    //注册成功，跳转登录页面
     router.push({
       path: "/user/login",
       replace: true,
