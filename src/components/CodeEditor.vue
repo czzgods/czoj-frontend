@@ -69,9 +69,9 @@ onMounted(() => {
     },
     readOnly: false,
     theme: "vs-dark",
-    //lineNumbers: "off",
-    //roundedSelection: false,
-    //scrollBeyondLastLine: false,
+    lineNumbers: "off",
+    roundedSelection: false,
+    scrollBeyondLastLine: false,
   });
 
   // 编辑 监听内容变化
