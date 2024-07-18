@@ -100,6 +100,11 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import MdEditor from "@/components/MdEditor.vue";
+import {
+  QuestionAddRequest,
+  QuestionControllerService,
+} from "../../../generated";
+import message from "@arco-design/web-vue/es/message";
 
 const form = reactive({
   title: "A + B",
@@ -119,6 +124,15 @@ const form = reactive({
   ],
 });
 
+const doSubmit = async () => {
+  console.log(form);
+  const res = await QuestionControllerService.addQuestionUsingPost(form);
+  if (res.code === 0) {
+    message.success("题目创建成功");
+  } else {
+    message.error("题目创建失败:" + res.message);
+  }
+};
 /**
  * 新增判题用例
  */
@@ -135,6 +149,14 @@ const handleAdd = () => {
  */
 const handleDelete = (index: number) => {
   form.judgeCase.splice(index, 1);
+};
+
+const onContentChange = (value: string) => {
+  form.content = value;
+};
+
+const onAnswerChange = (value: string) => {
+  form.answer = value;
 };
 </script>
 <style scoped>
