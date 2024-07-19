@@ -23,7 +23,7 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div>
+      <div @click="handleUserClick">
         <!--        加了这几个?,搭配上后面的"未登录"，会在store无状态信息的时候显示未登录-->
         {{ store.state.user?.loginUser?.userName ?? "未登录" }}
       </div>
@@ -79,12 +79,25 @@ const doMenuClick = (key: string) => {
   });
 };
 
-setTimeout(() => {
+const handleUserClick = () => {
+  const loginUserAccess =
+    store.state.user?.loginUser?.userRole ?? ACCESS_ENUM.NOT_LOGIN;
+  if (loginUserAccess === ACCESS_ENUM.NOT_LOGIN) {
+    router.push({
+      path: "/user/login",
+    });
+  } else {
+    router.push({
+      path: "/user/profile",
+    });
+  }
+};
+/*setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     userName: "怡宝",
     userRole: ACCESS_ENUM.ADMIN,
   });
-}, 3000);
+}, 3000);*/
 </script>
 
 <style scoped>
