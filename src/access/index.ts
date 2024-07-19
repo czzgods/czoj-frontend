@@ -9,11 +9,12 @@ import checkAccess from "@/access/checkAccess";
 router.beforeEach(async (to, from, next) => {
   console.log("登录用户信息", store.state.user.loginUser);
   //仅管理员可见，并且需要判断当前登录用户是否具有权限
-  const loginUser = store.state.user.loginUser;
+  let loginUser = store.state.user.loginUser;
   //如果之前没登录过，自动登录
   if (!loginUser || !loginUser.userRole) {
     //加 await 是为了等用户登录成功之后，再执行后续的代码
     await store.dispatch("user/getLoginUser");
+    loginUser = store.state.user.loginUser;
   }
   //获取用户要跳转的页面所需要的权限信息
   const needAccess = (to.meta?.access as string) ?? AccessEnum.NOT_LOGIN;

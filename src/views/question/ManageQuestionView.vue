@@ -123,7 +123,9 @@ const columns = [
 
 const onPageChange = (page: number) => {
   searchParams.value = {
+    //这行代码可以把分页查询前面的老值复制过来
     ...searchParams.value,
+    //下面就相当于用新的page值覆盖了老值
     current: page,
   };
 };
