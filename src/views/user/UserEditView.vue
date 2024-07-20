@@ -66,9 +66,13 @@
 <script setup lang="ts">
 import { IconEdit, IconPlus } from "@arco-design/web-vue/es/icon";
 import { ref, onMounted } from "vue";
-import { UserControllerService } from "../../generated";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+import { UserControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
-import router from "@/router";
+//import router from "@/router";
+const router = useRouter();
+const store = useStore();
 
 interface User {
   userAvatar: string;
@@ -109,6 +113,7 @@ const loadData = async () => {
 };
 
 const onChange = (_: any, currentFile: FileItem) => {
+  console.log("Current file:", currentFile);
   file.value = {
     ...currentFile,
     url: URL.createObjectURL(currentFile.file!),
@@ -120,16 +125,20 @@ const onProgress = (currentFile: FileItem) => {
 };
 
 const onSuccess = (response: { url: string }, currentFile: FileItem) => {
-  message.success("上传成功");
-  file.value = {
-    ...currentFile,
-    url: response.url,
-  };
-  user.value.userAvatar = response.url;
+  if (response.url) {
+    message.success("上传成功");
+    file.value = {
+      ...currentFile,
+      url: response.url,
+    };
+    user.value.userAvatar = response.url;
+  } else {
+    message.error("上传失败：未返回URL");
+  }
 };
 
 const onError = (error: any) => {
-  message.error("上传失败：" + error.message);
+  message.error("上传头像失败：" + error.message);
 };
 
 const beforeUpload = (file: File) => {

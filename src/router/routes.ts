@@ -10,6 +10,7 @@ import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import UserProfileView from "@/views/user/UserProfileView.vue";
+import UserEditView from "@/views/user/UserEditView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -29,8 +30,16 @@ export const routes: Array<RouteRecordRaw> = [
       },
       {
         path: "/user/profile",
-        name: "用户信息",
+        name: "个人信息",
         component: UserProfileView,
+        meta: {
+          access: ACCESS_ENUM.USER,
+        },
+      },
+      {
+        path: "/user/edit",
+        name: "修改个人信息",
+        component: UserEditView,
         meta: {
           access: ACCESS_ENUM.USER,
         },
