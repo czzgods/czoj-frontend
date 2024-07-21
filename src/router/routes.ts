@@ -11,6 +11,8 @@ import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import UserProfileView from "@/views/user/UserProfileView.vue";
 import UserEditView from "@/views/user/UserEditView.vue";
+import ViewQuestionsView from "@/views/question/ViewQuestionsView.vue";
+import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -67,6 +69,16 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/questions",
     name: "浏览题目",
     component: QuestionsView,
+  },
+  {
+    path: "/view/question/:id",
+    name: "在线做题",
+    component: ViewQuestionView,
+    props: true,
+    meta: {
+      access: ACCESS_ENUM.USER,
+      hideInMenu: true,
+    },
   },
   {
     path: "/add/question",
