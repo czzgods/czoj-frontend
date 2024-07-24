@@ -42,7 +42,7 @@ const codeEditor = ref();
 //   toRaw(codeEditor.value).setValue("新的值");
 // };
 
-/*watch(
+watch(
   () => props.language,
   () => {
     if (codeEditor.value) {
@@ -52,7 +52,7 @@ const codeEditor = ref();
       );
     }
   }
-);*/
+);
 
 onMounted(() => {
   if (!codeEditorRef.value) {
